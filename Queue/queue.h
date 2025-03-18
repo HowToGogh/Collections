@@ -6,6 +6,7 @@
 typedef struct {
     int* array;
     int next;
+    int last
 } Queue;
 
 void queue_create(Queue* queue);
