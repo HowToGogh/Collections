@@ -9,7 +9,7 @@ typedef struct {
 } Stack;
 
 void stack_create(Stack* stack);
-// void stack_delete(Stack* stack);
+void stack_delete(Stack* stack);
 void stack_push(int value, Stack* stack);
 int stack_pop(Stack* stack);
 int stack_top(Stack* stack);
