@@ -1,0 +1,17 @@
+#pragma once
+
+#define QUEUE_MAX_SIZE 128
+#define FAILURE_CODE -1
+
+typedef struct {
+    int* array;
+    int next;
+} Queue;
+
+void queue_create(Queue* queue);
+void queue_delete(Queue* queue);
+void queue_enqueue(Queue* queue);
+int queue_dequeue(Queue* queue);
+int queue_next(Queue* queue);
+int queue_is_empty(Queue* queue);
+int queue_is_full(Queue* queue);
