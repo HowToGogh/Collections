@@ -13,12 +13,12 @@ void queue_create(Queue* queue) {
         fprintf(stderr, "Memory allocation for queue is failed");
         return;
     }
-    queue->next = 0;
+    queue->last = 0;
 }
 
 void stack_delete(Queue* queue) {
     free(queue->array);
-    queue->next = -1;
+    queue->last = 0;
 }
 
 // You can not use this function in main, it used here only;
