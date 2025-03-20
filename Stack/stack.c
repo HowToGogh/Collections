@@ -15,6 +15,8 @@ stack_create(&stack);
 #include <stdlib.h>
 #include "stack.h"
 
+int stack_is_empty(Stack* stack);
+int stack_is_full(Stack* stack);
 int stack_is_null(Stack* stack);
 
 // Before this function Stack object is having undefined values
