@@ -2,4 +2,4 @@
 CMakeLists.txt
 *.exe
 other_files/
-TODO.c
+TODO.txt
