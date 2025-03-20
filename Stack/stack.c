@@ -3,13 +3,12 @@
 // If there is an error - there will be a couple of messages
 // and maybe program will stop completely (idk how to fix it I'm stupid);
 
-// Before using any of this create a stack object:
+// Before using any of this create a Stack object:
 /* 
 Stack myStack;
-stack_create(&stack);
+stack_create(&myStack);
 */
 // After this you can use others;
-
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -56,7 +55,7 @@ void stack_push(int value, Stack* stack) {
     stack->array[++stack->top] = value;
 }
 
-// Take item from Stack, item is returned and not in Stack anymore;
+// Take item from Stack, item is returned and not in stack anymore;
 int stack_pop(Stack* stack) {
     if (stack_is_null(stack)) {
         return FAILURE_CODE;
@@ -70,7 +69,7 @@ int stack_pop(Stack* stack) {
     return stack->array[stack->top--];
 }
 
-// Take item from Stack, item is returned and still in Stack;
+// Take item from Stack, item is returned and still in stack;
 int stack_top(Stack* stack) {
     if (stack_is_null(stack)) {
         return FAILURE_CODE;
@@ -84,7 +83,6 @@ int stack_top(Stack* stack) {
     return stack->array[stack->top];
 }
 
-// Check for Stack is empty (helpful definition)
 int stack_is_empty(Stack* stack) {
     if (stack_is_null(stack)) {
         return FAILURE_CODE;
@@ -93,7 +91,6 @@ int stack_is_empty(Stack* stack) {
     return stack->top == -1;
 }
 
-// Check for Stack is full (one more helpful definition)
 int stack_is_full(Stack* stack) {
     if (stack_is_null(stack)) {
         return FAILURE_CODE;
@@ -102,7 +99,6 @@ int stack_is_full(Stack* stack) {
     return stack->top == STACK_MAX_SIZE - 1;
 }
 
-// You can not use this function in main, it used here only;
 int stack_is_null(Stack* stack) {
     if (stack == NULL) {
         fprintf(stderr, "Stack pointer is NULL.\n");
