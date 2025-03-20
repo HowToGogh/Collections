@@ -13,5 +13,3 @@ void queue_delete(Queue* queue);
 void queue_enqueue(Queue* queue, int value);
 int queue_dequeue(Queue* queue);
 int queue_next(Queue* queue);
-int queue_is_empty(Queue* queue);
-int queue_is_full(Queue* queue);
