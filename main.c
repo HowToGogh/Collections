@@ -4,8 +4,8 @@
 #include "List/list.h"
 
 int main() {
-    Queue myQueue;
-    Stack myStack;
+    Queue* myQueue;
+    Stack* myStack;
 
     return 0;
 }
