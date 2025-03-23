@@ -29,6 +29,9 @@ Stack* stack_create() {
 }
 
 void stack_delete(Stack* stack) {
+    if (stack_is_null(stack)) {
+        return;
+    }
     free(stack->array);
     free(stack);
 }

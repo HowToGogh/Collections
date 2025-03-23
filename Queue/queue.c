@@ -48,7 +48,6 @@ void queue_enqueue(Queue* queue, int value) {
     }
 
     ++queue->count;
-    //queue->array[(queue->rear + 1) % QUEUE_MAX_SIZE] = value;
     queue->array[(queue->rear + 1) % QUEUE_MAX_SIZE] = value;
     ++queue->rear;
 }
@@ -100,7 +99,7 @@ static int queue_is_full(Queue* queue) {
         return FAILURE_CODE;
     }
 
-    return queue->count >= 256;
+    return queue->count >= QUEUE_MAX_SIZE;
 }
 
 static int queue_is_null(Queue* queue) {
