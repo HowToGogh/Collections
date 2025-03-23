@@ -1,80 +1,78 @@
-// Queue functionality;
-// If there no error - there won't be any messages;
-// If there is an error - there will be a couple of messages
-// and maybe program will stop completely (idk how to fix it I'm stupid);
-
-// Before using any of this create a Queue object:
-/* 
-Queue myQueue;
-queue_create(&myQueue);
-*/
-// After this you can use others;
-
 #include <stdio.h>
 #include <stdlib.h>
 #include "queue.h"
 
-// Functions that you can't use in "main" program but used here
-int queue_is_empty(Queue* queue);
-int queue_is_full(Queue* queue);
-int queue_is_null(Queue* queue);
-void queue_transition(Queue* queue);
+static int queue_is_empty(Queue* queue);
+static int queue_is_full(Queue* queue);
+static int queue_is_null(Queue* queue);
+static void queue_transition(Queue* queue);
 
-// Before this function Queue object is having undefined values;
-// This function will allocate memory for stack and define its attributes;
-void queue_create(Queue* queue) {
-    if (queue_is_null(queue)) {
-        return;
+Queue* queue_create() {
+    Queue* queue = (Queue*)malloc(sizeof(Queue));
+
+    if (queue == NULL) {
+        fprintf(stderr, "Memory for queue is not allocated.\n");
+        return NULL;
     }
-    queue->array = (int*)malloc(QUEUE_MAX_SIZE * sizeof(int));
+
+    queue->array = (int*)malloc(sizeof(int) * QUEUE_MAX_SIZE);
+
     if (queue->array == NULL) {
-        fprintf(stderr, "Memory allocation for queue is failed");
-        return;
+        fprintf(stderr, "Memory for queue array is not allocated.\n");
+        free(queue);
+        return NULL;
     }
-    queue->last = -1;
+
+    queue->count = 0;
+    queue->front = 0;
+    queue->rear = -1;
+
+    return queue;
 }
 
-// After this function there will not be any memory for stack
-// but Stack.top is still defined. Stack isn't destroyed completely;
-// (!!!) I'm not sure this function is safe ((((( ;
 void queue_delete(Queue* queue) {
     free(queue->array);
-    queue->last = -1;
+    free(queue);
 }
 
-// Add item to the and of a queue;
 void queue_enqueue(Queue* queue, int value) {
     if (queue_is_null(queue)) {
-        return;
-    }
-    
-    if (queue_is_full(queue)) {
-        fprintf(stderr, "Queue is full.\n");
+        printf("Queue is NULL.\n");
         return;
     }
 
-    queue->array[++queue->last] = value;
+    if (queue_is_full(queue)) {
+        printf("Queue is full! Front value replaced.\n");
+        --queue->count;
+        queue->front = (queue->front + 1) % QUEUE_MAX_SIZE;
+    }
+
+    ++queue->count;
+    //queue->array[(queue->rear + 1) % QUEUE_MAX_SIZE] = value;
+    queue->array[(queue->rear + 1) % QUEUE_MAX_SIZE] = value;
+    ++queue->rear;
 }
 
-// Get first item of a queue, item is returned and not in queue anymore;
 int queue_dequeue(Queue* queue) {
     if (queue_is_null(queue)) {
-        fprintf(stderr, "Queue is null.\n");
+        printf("Queue is NULL.\n");
         return FAILURE_CODE;
     }
     
     if (queue_is_empty(queue)) {
-        fprintf(stderr, "Queue is empty.\n");
+        printf("Queue is empty. No value to dequeue.\n");
         return FAILURE_CODE;
     }
 
-    int value = queue->array[0];
-    queue_transition(queue);
-    --queue->last;
-    return value;
+    int val = queue->array[queue->front];
+
+    --queue->count;
+    queue->front = (queue->front + 1) % QUEUE_MAX_SIZE;
+    
+    return val;
+
 }
 
-// Get first item of a queue, item is returned and still in queue;
 int queue_next(Queue* queue) {
     if (queue_is_null(queue)) {
         fprintf(stderr, "Queue is null.\n");
@@ -86,45 +84,25 @@ int queue_next(Queue* queue) {
         return FAILURE_CODE;
     }
 
-    return queue->array[0];
+    return queue->array[queue->front];
 }
 
-int queue_is_empty(Queue* queue) {
+static int queue_is_empty(Queue* queue) {
     if (queue_is_null(queue)) {
-        fprintf(stderr, "Queue is null.\n");
         return FAILURE_CODE;
     }
 
-    return queue->last == -1;
+    return queue->count == 0;
 }
 
-int queue_is_full(Queue* queue) {
+static int queue_is_full(Queue* queue) {
     if (queue_is_null(queue)) {
-        fprintf(stderr, "Queue is null.\n");
         return FAILURE_CODE;
     }
 
-    return queue->last == QUEUE_MAX_SIZE - 1;
+    return queue->count >= 256;
 }
 
-int queue_is_null(Queue* queue) {
-    if (queue == NULL) {
-        fprintf(stderr, "Stack pointer is NULL.\n");
-        return 1;
-    }
-    return 0;
-}
-
-void queue_transition(Queue* queue) {
-    if (queue_is_null(queue)) {
-        return;
-    }
-
-    if (queue_is_empty(queue)) {
-        return;
-    }
-
-    for (int i = 0; i != queue->last; ++i) {
-        queue->array[i] = queue->array[i + 1];
-    }
+static int queue_is_null(Queue* queue) {
+    return (queue == NULL);
 }

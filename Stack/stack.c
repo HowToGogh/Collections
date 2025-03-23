@@ -35,6 +35,7 @@ void stack_delete(Stack* stack) {
 
 void stack_push(Stack* stack, int value) {
     if (stack_is_null(stack)) {
+        printf("Stack is NULL.\n");
         return;
     }
 
@@ -48,6 +49,7 @@ void stack_push(Stack* stack, int value) {
 
 int stack_pop(Stack* stack) {
     if (stack_is_null(stack)) {
+        printf("Stack is NULL.\n");
         return FAILURE_CODE;
     }
 
@@ -61,6 +63,7 @@ int stack_pop(Stack* stack) {
 
 int stack_top(Stack* stack) {
     if (stack_is_null(stack)) {
+        printf("Stack is NULL.\n");
         return FAILURE_CODE;
     }
 

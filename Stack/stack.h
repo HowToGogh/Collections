@@ -6,7 +6,7 @@
 typedef struct {
     int* array;
     size_t size;
-    int top;
+    size_t top;
 } Stack;
 
 Stack* stack_create();
