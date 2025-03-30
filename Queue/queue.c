@@ -2,10 +2,10 @@
 #include <stdlib.h>
 #include "queue.h"
 
-static int queue_is_empty(Queue* queue);
-static int queue_is_full(Queue* queue);
-static int queue_is_null(Queue* queue);
-static void queue_transition(Queue* queue);
+static int queue_is_empty(Queue*);
+static int queue_is_full(Queue*);
+static int queue_is_null(Queue*);
+static void queue_transition(Queue*);
 
 Queue* queue_create() {
     Queue* queue = (Queue*)malloc(sizeof(Queue));

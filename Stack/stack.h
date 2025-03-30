@@ -10,7 +10,7 @@ typedef struct {
 } Stack;
 
 Stack* stack_create();
-void stack_delete(Stack* stack);
-void stack_push(Stack* stack, int value);
-int stack_pop(Stack* stack);
-int stack_top(Stack* stack);
+void stack_delete(Stack*);
+void stack_push(Stack*, int);
+int stack_pop(Stack*);
+int stack_top(Stack*);

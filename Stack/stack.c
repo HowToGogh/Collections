@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include "stack.h"
 
-static int stack_is_empty(Stack* stack);
-static int stack_is_full(Stack* stack);
-static int stack_is_null(Stack* stack);
+static int stack_is_empty(Stack*);
+static int stack_is_full(Stack*);
+static int stack_is_null(Stack*);
 
 Stack* stack_create() {
     Stack* stack = (Stack*)malloc(sizeof(Stack));

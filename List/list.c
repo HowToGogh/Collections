@@ -2,10 +2,10 @@
 #include <stdlib.h>
 #include "list.h"
 
-static int list_is_empty(List* list);
-static int list_is_full(List* list);
-static int list_is_null(List* list);
-static void list_transition(List* list, int from, int to);
+static int list_is_empty(List*);
+static int list_is_full(List*);
+static int list_is_null(List*);
+static void list_transition(List*, int, int);
 
 List* list_create() {
     List* list = (List*)malloc(sizeof(List));

@@ -6,6 +6,7 @@
 int main() {
     Queue* myQueue;
     Stack* myStack;
+    List* myList;
 
     return 0;
 }

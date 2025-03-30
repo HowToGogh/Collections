@@ -11,7 +11,7 @@ typedef struct {
 } Queue;
 
 Queue* queue_create();
-void queue_delete(Queue* queue);
-void queue_enqueue(Queue* queue, int value);
-int queue_dequeue(Queue* queue);
-int queue_next(Queue* queue);
+void queue_delete(Queue*);
+void queue_enqueue(Queue*, int);
+int queue_dequeue(Queue*);
+int queue_next(Queue*);

@@ -10,9 +10,9 @@ typedef struct {
 } List;
 
 List* list_create();
-void list_delete(List* list);
-void list_add(List* list, int value);
-int list_take(List* list, int index);
-void list_remove(List* list, int index);
-int list_find(List* list, int value);
-void list_sort(List* list);
+void list_delete(List*);
+void list_add(List*, int);
+int list_take(List*, int);
+void list_remove(List*, int);
+int list_find(List*, int);
+void list_sort(List*);
