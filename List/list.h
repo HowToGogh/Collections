@@ -14,5 +14,6 @@ void list_delete(List*);
 void list_add(List*, int);
 int list_take(List*, int);
 void list_remove(List*, int);
-int list_find(List*, int);
+int list_search(List*, int);
+int list_binary_search(List*, int);
 void list_sort(List*);

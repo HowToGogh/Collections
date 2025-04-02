@@ -1,5 +1,4 @@
 *.bat
-CMakeLists.txt
 *.exe
 other_files/
 TODO.txt

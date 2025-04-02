@@ -6,6 +6,9 @@ static int list_is_empty(List*);
 static int list_is_full(List*);
 static int list_is_null(List*);
 static void list_transition(List*, int, int);
+static void swap(int*, int*);
+static void partition();
+static int search(List*, int);
 
 List* list_create() {
     List* list = (List*)malloc(sizeof(List));
@@ -89,6 +92,65 @@ void list_remove(List* list, int index) {
     list_transition(list, index, list->last--);
 }
 
+void list_sort(List* list) {
+    if (list_is_null(list)) {
+        fprintf(stderr, "List is NULL.\n");
+        return;
+    }
+
+    if (list_is_empty(list)) {
+        fprintf(stderr, "List is empty, nothing to remove.\n");
+        return;
+    }
+    
+    partition(list, 0, list->last);
+}
+
+int list_search(List* list, int value) {
+    if (list_is_null(list)) {
+        fprintf(stderr, "List is NULL.\n");
+        return FAILURE_CODE;
+    }
+
+    if (list_is_empty(list)) {
+        fprintf(stderr, "List is empty, nothing to remove.\n");
+        return FAILURE_CODE;
+    }
+    
+    int left = 0, right = list->last;
+    while (left <= right) {
+        if (list->array[left] == value) return left;
+        else if (list->array[right] == value) return right;
+        left++, right--;
+    }
+
+    fprintf(stderr, "Value is not on the list.\n");
+    return FAILURE_CODE;
+}
+
+int list_binary_search(List* list, int value) {
+    int left = 0, right = list->last, mid;
+
+    if (list->array[left] == value)
+        return left;
+    if (list->array[right] == value)
+        return right;
+    
+    while (left <= right) {
+        mid = left + (right - left) / 2;
+        if (list->array[mid] < value) {
+            left = mid + 1;
+        }
+        else if ( list->array[mid] > value) {
+            right = mid - 1;
+        }
+        else return mid;
+    }
+
+    fprintf(stderr, "Value is not on the list.\n");
+    return FAILURE_CODE;
+}
+
 static int list_is_empty(List* list) {
     if (list_is_null(list)) {
         return FAILURE_CODE;
@@ -120,5 +182,31 @@ static void list_transition(List* list, int from, int to) {
 
     for (int i = from; i != to; ++i) {
         list->array[from] = list->array[from + 1];
+    }
+}
+
+static void swap(int* a, int* b) {
+    if (*a != *b) {
+        int temp = *a;
+        *a = *b;
+        *b = temp;
+    }
+}
+
+static void partition(List* list, int left, int right) {
+    if (left < right) {
+        int pivot = right;
+
+        int i = left - 1, j = left;
+
+        for (; j < pivot; ++j) {
+            if (list->array[j] <= list->array[pivot]) {
+                swap(&list->array[++i], &list->array[j]);
+            }
+        }
+        swap(&list->array[i + 1], &list->array[j]);
+
+        partition(list, left, i);
+        partition(list, i + 1, right);
     }
 }
