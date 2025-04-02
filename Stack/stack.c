@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include "stack.h"
 
+//  Static functions are not documented, 
+//  due to the clarity of the functionality and unavailability outside the current file.
+
 static int stack_is_empty(Stack*);
 static int stack_is_full(Stack*);
 static int stack_is_null(Stack*);
