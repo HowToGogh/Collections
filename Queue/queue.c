@@ -2,10 +2,12 @@
 #include <stdlib.h>
 #include "queue.h"
 
+//  Static functions are not documented, 
+//  due to the clarity of the functionality and unavailability outside the current file.
+
 static int queue_is_empty(Queue*);
 static int queue_is_full(Queue*);
 static int queue_is_null(Queue*);
-static void queue_transition(Queue*);
 
 Queue* queue_create() {
     Queue* queue = (Queue*)malloc(sizeof(Queue));

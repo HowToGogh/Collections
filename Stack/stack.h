@@ -3,7 +3,8 @@
 //  the stack size can change during runtime regardless of the macro value.
 #define STACK_DEFAULT_SIZE 64
 //  Default error code. 
-//  It may be mistaken for the result of a function. It is recommended to keep a close eye on error messages.
+//  It may be mistaken for the result of a function.
+//  It is recommended to keep a close eye on error messages.
 #define FAILURE_CODE -1
 
 /*
@@ -18,7 +19,7 @@ IMPORTANT:
 -It is not recommended to use the structure fields manually, it is better to use the appropriate functions.
 Manual modification can lead to errors, data losses, or undefined results.
 */
-typedef struct stack {
+typedef struct stack_t {
     int* array;
     int top;
     size_t size;
@@ -73,7 +74,7 @@ void stack_push(Stack*, int);
 
     IMPORTANT:
 
-    - Popping a value from an undefined stack is undefined.
+    - Value popped from an undefined stack is undefined.
     - If the memory for the array has been expanded during the process of adding values to the stack,
     popping values does not free up unused memory.
 
