@@ -114,11 +114,11 @@ int list_search(List*, int);
 */
 int list_binary_search(List*, int);
 /*
-The function sorts the values in the list in ascending order.
-A quick sort algorithm is used.
+    The function sorts the values in the list in ascending order.
+    A quick sort algorithm is used.
 
-USAGE EXAMPLE:
+    USAGE EXAMPLE:
 
-list_sort(myList);
+    list_sort(myList);
 */
 void list_sort(List*);
