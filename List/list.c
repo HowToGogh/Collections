@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include "list.h"
 
+//  Static functions are not documented, 
+//  due to the clarity of the functionality and unavailability outside the current file.
+
 static int list_is_empty(List*);
 static int list_is_full(List*);
 static int list_is_null(List*);
@@ -129,6 +132,16 @@ int list_search(List* list, int value) {
 }
 
 int list_binary_search(List* list, int value) {
+    if (list_is_null(list)) {
+        fprintf(stderr, "List is NULL.\n");
+        return FAILURE_CODE;
+    }
+
+    if (list_is_empty(list)) {
+        fprintf(stderr, "List is empty, nothing to remove.\n");
+        return FAILURE_CODE;
+    }
+    
     int left = 0, right = list->last, mid;
 
     if (list->array[left] == value)
@@ -181,7 +194,7 @@ static void list_transition(List* list, int from, int to) {
     }
 
     for (int i = from; i != to; ++i) {
-        list->array[from] = list->array[from + 1];
+        list->array[i] = list->array[i + 1];
     }
 }
 
