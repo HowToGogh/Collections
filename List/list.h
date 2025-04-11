@@ -67,6 +67,20 @@ void list_delete(List*);
     list_add(myList, 42);
 */
 void list_add(List*, int);
+/*
+    The function takes value from the list.
+    If the list is empty, an FAILURE_CODE is returned (-1 by default) with the corresponding message.
+
+    IMPORTANT:
+
+    - If the memory for the array has been expanded during the process of adding values to the stack,
+    removing values does not free up unused memory.
+    - If index is bigger than list array size - an FAILURE_CODE is returned (-1 by default) with the corresponding message.
+
+    USAGE EXAMPLE:
+
+    list_take(myStack, 42);
+*/
 int list_take(List*, int);
 /*
     The function removes value from the list.
@@ -76,10 +90,11 @@ int list_take(List*, int);
 
     - If the memory for the array has been expanded during the process of adding values to the stack,
     removing values does not free up unused memory.
+    - If index is bigger than list array size - an error message occured.
 
     USAGE EXAMPLE:
 
-    list_remove(myStack);
+    list_remove(myStack, 42);
 */
 void list_remove(List*, int);
 /*
