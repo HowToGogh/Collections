@@ -27,7 +27,7 @@ Manual modification can lead to errors, data losses, or undefined results.
 typedef struct list_t {
     int* array;
     int last;
-    size_t size;
+    int size;
 } List;
 
 /*

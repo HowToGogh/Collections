@@ -27,7 +27,7 @@ enum error {
 typedef struct stack_t {
     int* array;
     int top;
-    size_t size;
+    int size;
 } Stack;
 
 /*

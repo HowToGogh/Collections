@@ -10,7 +10,7 @@ enum error {
     ERROR_NULL           = -102,
     ERROR_EMPTY_ARRAY    = -103,
     ERROR_FULL_ARRAY     = -104,
-    FAILURE_CODE         = -199
+    FAILURE_CODE = -199
 };
 
 /*
@@ -27,9 +27,9 @@ Manual modification can lead to errors, data losses, or undefined results.
 */
 typedef struct queue_t {
     int* array;
-    size_t count;
-    size_t front;
-    size_t rear;
+    int count;
+    int front;
+    int rear;
 } Queue;
 
 /*
