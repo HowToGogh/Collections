@@ -35,18 +35,21 @@ List* list_create() {
     return list;
 }
 
-void list_delete(List* list) {
+int list_delete(List* list) {
     if (list_is_null(list)) {
-        return;
+        return ERROR_NULL;
     }
+
     free(list->array);
     free(list);
+
+    return SUCCESS_NO_ERROR;
 }
 
-void list_add(List* list, int value) {
+int list_add(List* list, int value) {
     if (list_is_null(list)) {
         fprintf(stderr, "List is NULL.\n");
-        return;
+        return ERROR_NULL;
     }
 
     if (list_is_full(list)) {
@@ -55,17 +58,19 @@ void list_add(List* list, int value) {
     }
 
     list->array[++list->last] = value;
+
+    return SUCCESS_NO_ERROR;
 }
 
 int list_take(List* list, int index) {
     if (list_is_null(list)) {
         fprintf(stderr, "List is NULL.\n");
-        return FAILURE_CODE;
+        return ERROR_NULL;
     }
 
     if (list_is_empty(list)) {
         fprintf(stderr, "List is empty, nothing to take.\n");
-        return FAILURE_CODE;
+        return ERROR_EMPTY_ARRAY;
     }
 
     if (index > list->last) {
@@ -76,48 +81,52 @@ int list_take(List* list, int index) {
     return list->array[index];
 }
 
-void list_remove(List* list, int index) {
+int list_remove(List* list, int index) {
     if (list_is_null(list)) {
         fprintf(stderr, "List is NULL.\n");
-        return;
+        return ERROR_NULL;
     }
 
     if (list_is_empty(list)) {
         fprintf(stderr, "List is empty, nothing to remove.\n");
-        return;
+        return ERROR_EMPTY_ARRAY;
     }
 
     if (index > list->last) {
         fprintf(stderr, "List index is out of range, nothing to remove.\n");
-        return;
+        return FAILURE_CODE;
     }
 
     list_transition(list, index, list->last--);
+
+    return SUCCESS_NO_ERROR;
 }
 
-void list_sort(List* list) {
+int list_sort(List* list) {
     if (list_is_null(list)) {
         fprintf(stderr, "List is NULL.\n");
-        return;
+        return ERROR_NULL;
     }
 
     if (list_is_empty(list)) {
         fprintf(stderr, "List is empty, nothing to remove.\n");
-        return;
+        return ERROR_EMPTY_ARRAY;
     }
     
     partition(list, 0, list->last);
+
+    return SUCCESS_NO_ERROR;
 }
 
 int list_search(List* list, int value) {
     if (list_is_null(list)) {
         fprintf(stderr, "List is NULL.\n");
-        return FAILURE_CODE;
+        return ERROR_NULL;
     }
 
     if (list_is_empty(list)) {
         fprintf(stderr, "List is empty, nothing to remove.\n");
-        return FAILURE_CODE;
+        return ERROR_EMPTY_ARRAY;
     }
     
     int left = 0, right = list->last;
@@ -134,12 +143,12 @@ int list_search(List* list, int value) {
 int list_binary_search(List* list, int value) {
     if (list_is_null(list)) {
         fprintf(stderr, "List is NULL.\n");
-        return FAILURE_CODE;
+        return ERROR_NULL;
     }
 
     if (list_is_empty(list)) {
         fprintf(stderr, "List is empty, nothing to remove.\n");
-        return FAILURE_CODE;
+        return ERROR_EMPTY_ARRAY;
     }
     
     int left = 0, right = list->last, mid;
@@ -166,7 +175,7 @@ int list_binary_search(List* list, int value) {
 
 static int list_is_empty(List* list) {
     if (list_is_null(list)) {
-        return FAILURE_CODE;
+        return ERROR_NULL;
     }
 
     return list->last == -1;
@@ -174,7 +183,7 @@ static int list_is_empty(List* list) {
 
 static int list_is_full(List* list) {
     if (list_is_null(list)) {
-        return FAILURE_CODE;
+        return ERROR_NULL;
     }
 
     return list->last == list->size - 1;

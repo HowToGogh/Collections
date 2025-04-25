@@ -2,10 +2,15 @@
 //  This parameter is responsible for the default size of the list array, however,
 //  the list size can change during runtime regardless of the macro value.
 #define LIST_DEFAULT_SIZE 64
-//  Default error code. 
-//  It may be mistaken for the result of a function.
-//  It is recommended to keep a close eye on error messages.
-#define FAILURE_CODE -1
+
+enum error {
+    SUCCESS_NO_ERROR     =    0,
+    ERROR_MALLOC_FAILURE = -101,
+    ERROR_NULL           = -102,
+    ERROR_EMPTY_ARRAY    = -103,
+    ERROR_FULL_ARRAY     = -104,
+    FAILURE_CODE = -199
+};
 
 /*
 The structure contains:
@@ -52,7 +57,7 @@ List* list_create();
 
     list_delete(myStack);
 */
-void list_delete(List*);
+int list_delete(List*);
 /*
     The function adds a value to the list.
 
@@ -66,7 +71,7 @@ void list_delete(List*);
 
     list_add(myList, 42);
 */
-void list_add(List*, int);
+int list_add(List*, int);
 /*
     The function takes value from the list.
     If the list is empty, an FAILURE_CODE is returned (-1 by default) with the corresponding message.
@@ -96,7 +101,7 @@ int list_take(List*, int);
 
     list_remove(myStack, 42);
 */
-void list_remove(List*, int);
+int list_remove(List*, int);
 /*
     Function searches for the value in the list, and returns its index.
     The search algorithm is similar to linear search, but in some cases it will be slightly faster.
@@ -136,4 +141,4 @@ int list_binary_search(List*, int);
 
     list_sort(myList);
 */
-void list_sort(List*);
+int list_sort(List*);
