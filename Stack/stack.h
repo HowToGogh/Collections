@@ -2,15 +2,20 @@
 //  This parameter is responsible for the default size of the stack array, however,
 //  the stack size can change during runtime regardless of the macro value.
 #define STACK_DEFAULT_SIZE 64
-//  Default error code. 
-//  It may be mistaken for the result of a function.
-//  It is recommended to keep a close eye on error messages.
-#define FAILURE_CODE -1
+
+enum error {
+    SUCCESS_CODE = 0,
+    MALLOC_FAILURE_ERROR = -101,
+    NULL_ERROR = -102,
+    EMPTY_ARRAY_ERROR = -103,
+    FULL_ARRAY_ERROR = -104
+    // FAILURE_CODE = -199
+};
 
 /*
 The structure contains:
-- array: a pointer to a memory location allocated for stack values.
-Memory is allocated by the stack_create() function (see the stack_create() documentation).
+  Memory is allocated by the stack_create() function (see the stack
+reate() documentation).
 - top: the value indicating the index of the top element of the stack.
 - size: the value indicating the actual size of the array (by default, size is STACK_DEFAULT_SIZE)
 
@@ -52,7 +57,7 @@ Stack* stack_create();
 
     stack_delete(myStack);
 */
-void stack_delete(Stack*);
+int stack_delete(Stack*);
 /*
     The function adds a value to the stack.
 
@@ -66,7 +71,7 @@ void stack_delete(Stack*);
 
     stack_push(myStack, 42);
 */
-void stack_push(Stack*, int);
+int stack_push(Stack*, int);
 /*
     The function returns the top value of the stack and removes it from it.
     If the stack is empty, an FAILURE_CODE is returned (-1 by default) with the corresponding message.
