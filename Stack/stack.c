@@ -33,19 +33,19 @@ Stack* stack_create() {
 
 int stack_delete(Stack* stack) {
     if (stack_is_null(stack)) {
-        return NULL_ERROR;
+        return ERROR_NULL;
     }
 
     free(stack->array);
     free(stack);
 
-    return SUCCESS_CODE;
+    return SUCCESS_NO_ERROR;
 }
 
 int stack_push(Stack* stack, int value) {
     if (stack_is_null(stack)) {
         printf("Stack is NULL.\n");
-        return NULL_ERROR;
+        return ERROR_NULL;
     }
 
     if (stack_is_full(stack)) {
@@ -55,18 +55,18 @@ int stack_push(Stack* stack, int value) {
 
     stack->array[++stack->top] = value;
 
-    return SUCCESS_CODE;
+    return SUCCESS_NO_ERROR;
 }
 
 int stack_pop(Stack* stack) {
     if (stack_is_null(stack)) {
         printf("Stack is NULL.\n");
-        return NULL_ERROR;
+        return ERROR_NULL;
     }
 
     if (stack_is_empty(stack)) {
         fprintf(stderr, "Stack is empty. No value to pop.\n");
-        return EMPTY_ARRAY_ERROR;
+        return ERROR_EMPTY_ARRAY;
     }
 
     return stack->array[stack->top--];
@@ -75,12 +75,12 @@ int stack_pop(Stack* stack) {
 int stack_top(Stack* stack) {
     if (stack_is_null(stack)) {
         printf("Stack is NULL.\n");
-        return NULL_ERROR;
+        return ERROR_NULL;
     }
 
     if (stack_is_empty(stack)) {
         fprintf(stderr, "Stack is empty.\n");
-        return EMPTY_ARRAY_ERROR;
+        return ERROR_EMPTY_ARRAY;
     }
 
     return stack->array[stack->top];
@@ -88,7 +88,7 @@ int stack_top(Stack* stack) {
 
 static int stack_is_empty(Stack* stack) {
     if (stack_is_null(stack)) {
-        return NULL_ERROR;
+        return ERROR_NULL;
     }
 
     return stack->top == -1;
@@ -96,7 +96,7 @@ static int stack_is_empty(Stack* stack) {
 
 static int stack_is_full(Stack* stack) {
     if (stack_is_null(stack)) {
-        return NULL_ERROR;
+        return ERROR_NULL;
     }
 
     return stack->top == stack->size - 1;

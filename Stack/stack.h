@@ -4,11 +4,11 @@
 #define STACK_DEFAULT_SIZE 64
 
 enum error {
-    SUCCESS_CODE = 0,
-    MALLOC_FAILURE_ERROR = -101,
-    NULL_ERROR = -102,
-    EMPTY_ARRAY_ERROR = -103,
-    FULL_ARRAY_ERROR = -104
+    SUCCESS_NO_ERROR     =    0,
+    ERROR_MALLOC_FAILURE = -101,
+    ERROR_NULL           = -102,
+    ERROR_EMPTY_ARRAY    = -103,
+    ERROR_FULL_ARRAY     = -104
     // FAILURE_CODE = -199
 };
 
