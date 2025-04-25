@@ -13,16 +13,16 @@ enum error {
 };
 
 /*
-The structure contains:
-  Memory is allocated by the stack_create() function (see the stack
-reate() documentation).
-- top: the value indicating the index of the top element of the stack.
-- size: the value indicating the actual size of the array (by default, size is STACK_DEFAULT_SIZE)
+    The structure contains:
+    Memory is allocated by the stack_create() function (see the stack
+    reate() documentation).
+    - top: the value indicating the index of the top element of the stack.
+    - size: the value indicating the actual size of the array (by default, size is STACK_DEFAULT_SIZE)
 
-IMPORTANT:
+    IMPORTANT:
 
--It is not recommended to use the structure fields manually, it is better to use the appropriate functions.
-Manual modification can lead to errors, data losses, or undefined results.
+    -It is not recommended to use the structure fields manually, it is better to use the appropriate functions.
+    Manual modification can lead to errors, data losses, or undefined results.
 */
 typedef struct stack_t {
     int* array;
