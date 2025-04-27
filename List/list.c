@@ -89,7 +89,7 @@ int list_remove(List* list, int index) {
     }
 
     if (list_is_empty(list)) {
-        fprintf(stderr, "List is empty, nothing to remove.\n");
+        fprintf(stderr, "List is empty. No value to remove.\n");
         return ERROR_EMPTY_ARRAY;
     }
 

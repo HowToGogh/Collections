@@ -2,3 +2,4 @@
 *.exe
 other_files/
 TODO.txt
+test.c
