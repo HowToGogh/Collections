@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "queue.h"
+#include "../errors.h"
 
 //  Static functions are not documented, 
 //  due to the clarity of the functionality and unavailability outside the current file.

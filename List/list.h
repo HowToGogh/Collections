@@ -3,15 +3,6 @@
 //  the list size can change during runtime regardless of the macro value.
 #define LIST_DEFAULT_SIZE 64
 
-enum error {
-    SUCCESS_NO_ERROR     =    0,
-    ERROR_MALLOC_FAILURE = -101,
-    ERROR_NULL           = -102,
-    ERROR_EMPTY_ARRAY    = -103,
-    ERROR_FULL_ARRAY     = -104,
-    FAILURE_CODE = -199
-};
-
 /*
 The structure contains:
 - array: a pointer to a memory location allocated for list values.

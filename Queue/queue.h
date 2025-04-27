@@ -2,16 +2,7 @@
 //  This parameter is responsible for the default size of the queue array.
 //  The queue size cannot be changed during runtime.
 //  You can use this parameter to change the amount of memory allocated for each structure object.
-#define QUEUE_MAX_SIZE 256 
-
-enum error {
-    SUCCESS_NO_ERROR     =    0,
-    ERROR_MALLOC_FAILURE = -101,
-    ERROR_NULL           = -102,
-    ERROR_EMPTY_ARRAY    = -103,
-    ERROR_FULL_ARRAY     = -104,
-    FAILURE_CODE = -199
-};
+#define QUEUE_MAX_SIZE 256
 
 /*
 The structure contains:
