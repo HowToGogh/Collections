@@ -52,19 +52,19 @@ Queue* queue_create();
 */
 int queue_delete(Queue*);
 /*
-The function adds the value to the end of the queue.
+    The function adds the value to the end of the queue.
 
-IMPORTANT:
+    IMPORTANT:
 
-- If there is not enough memory in the queue to add a value, the highest queue element
-(i.e. the first one) is replaced with a new queue element.
-In this queue implementation, new data has a higher priority than old data.
-- It is possible to add a value to an undefined queue (before using the queue_create() function),
-but the result will be undefined.
+    - If there is not enough memory in the queue to add a value, the highest queue element
+    (i.e. the first one) is replaced with a new queue element.
+    In this queue implementation, new data has a higher priority than old data.
+    - It is possible to add a value to an undefined queue (before using the queue_create() function),
+    but the result will be undefined.
 
-USAGE EXAMPLE:
+    USAGE EXAMPLE:
 
-queue_enqueue(myQueue, 42);
+    queue_enqueue(myQueue, 42);
 */
 int queue_enqueue(Queue*, int);
 /*
