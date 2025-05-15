@@ -2,7 +2,7 @@
 //  This parameter is responsible for the default size of the queue array.
 //  The queue size cannot be changed during runtime.
 //  You can use this parameter to change the amount of memory allocated for each structure object.
-#define QUEUE_MAX_SIZE 256
+#define QUEUE_MAX_SIZE 512
 
 /*
 The structure contains:
