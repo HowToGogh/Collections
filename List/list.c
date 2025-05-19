@@ -11,7 +11,7 @@ static int list_is_full(List*);
 static int list_is_null(List*);
 static void list_transition(List*, int, int);
 static void swap(int*, int*);
-static void partition();
+static void partition(List*, int, int);
 static int search(List*, int);
 
 List* list_create() {
