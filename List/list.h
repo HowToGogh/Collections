@@ -1,7 +1,7 @@
 #pragma once
 //  This parameter is responsible for the default size of the list array, however,
 //  the list size can change during runtime regardless of the macro value.
-#define LIST_DEFAULT_SIZE 64
+#define LIST_DEFAULT_SIZE 16
 
 /*
 The structure contains:
@@ -17,8 +17,8 @@ Manual modification can lead to errors, data losses, or undefined results.
 */
 typedef struct list_t {
     int* array;
-    int last;
-    int size;
+    size_t last;
+    size_t size;
 } List;
 
 /*

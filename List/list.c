@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "list.h"
 #include "../errors.h"
 
@@ -55,7 +56,17 @@ int list_add(List* list, int value) {
 
     if (list_is_full(list)) {
         list->size *= 2;
-        list->array = realloc(list->array, sizeof(int) * list->size);
+
+        int* temp = malloc(sizeof(int) * list->size);
+        if (temp == NULL) {
+            fprintf(stderr, "Can't not add value, due to memory allocation error");
+            return ERROR_FULL_ARRAY;
+        }
+
+        memcpy(temp, list->array, sizeof(int) * (list->last + 1));
+
+        free(list->array);
+        list->array = temp;
     }
 
     list->array[++list->last] = value;
@@ -74,7 +85,7 @@ int list_take(List* list, int index) {
         return ERROR_EMPTY_ARRAY;
     }
 
-    if (index > list->last) {
+    if (index > list->last || index < 0) {
         fprintf(stderr, "List index is out of range, nothing to take.\n");
         return FAILURE_CODE;
     }
@@ -93,7 +104,7 @@ int list_remove(List* list, int index) {
         return ERROR_EMPTY_ARRAY;
     }
 
-    if (index > list->last) {
+    if (index > list->last || index < 0) {
         fprintf(stderr, "List index is out of range, nothing to remove.\n");
         return FAILURE_CODE;
     }
@@ -110,7 +121,7 @@ int list_sort(List* list) {
     }
 
     if (list_is_empty(list)) {
-        fprintf(stderr, "List is empty, nothing to remove.\n");
+        fprintf(stderr, "List is empty, nothing to sort.\n");
         return ERROR_EMPTY_ARRAY;
     }
     
@@ -126,7 +137,7 @@ int list_search(List* list, int value) {
     }
 
     if (list_is_empty(list)) {
-        fprintf(stderr, "List is empty, nothing to remove.\n");
+        fprintf(stderr, "List is empty, nothing to search.\n");
         return ERROR_EMPTY_ARRAY;
     }
     
@@ -148,7 +159,7 @@ int list_binary_search(List* list, int value) {
     }
 
     if (list_is_empty(list)) {
-        fprintf(stderr, "List is empty, nothing to remove.\n");
+        fprintf(stderr, "List is empty, nothing to search.\n");
         return ERROR_EMPTY_ARRAY;
     }
     
@@ -202,7 +213,7 @@ static void list_transition(List* list, int from, int to) {
     if (list_is_empty(list)) {
         return;
     }
-
+    
     for (int i = from; i != to; ++i) {
         list->array[i] = list->array[i + 1];
     }
