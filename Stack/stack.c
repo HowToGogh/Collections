@@ -28,6 +28,10 @@ Stack* stack_create() {
     }
 
     stack->top = -1;
+    stack->delete = &stack_delete;
+    stack->add = &stack_push;
+    stack->take = &stack_pop;
+    stack->next = &stack_top;
 
     return stack;
 }

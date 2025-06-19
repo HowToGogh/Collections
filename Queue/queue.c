@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "queue.h"
+#include "./queue.h"
 #include "../errors.h"
 
 //  Static functions are not documented, 
@@ -29,6 +29,10 @@ Queue* queue_create() {
     queue->count = 0;
     queue->front = 0;
     queue->rear = -1;
+    queue->delete = &queue_delete;
+    queue->add = &queue_enqueue;
+    queue->take = &queue_dequeue;
+    queue->next = &queue_next;
 
     return queue;
 }

@@ -16,11 +16,16 @@ IMPORTANT:
 -It is not recommended to use the structure fields manually, it is better to use the appropriate functions.
 Manual modification can lead to errors, data losses, or undefined results.
 */
+typedef struct queue_t Queue;
 typedef struct queue_t {
     int* array;
     int count;
     int front;
     int rear;
+    int (*delete)(Queue*);
+    int (*add)(Queue*, int);
+    int (*take)(Queue*);
+    int (*next)(Queue*);
 } Queue;
 
 /*
@@ -38,6 +43,7 @@ typedef struct queue_t {
     Queue* myQueue = queue_create();
 */
 Queue* queue_create();
+
 /*
     If the queue is no longer required, it should be deleted.
     The function frees up the memory allocated for the queue array and makes the fields of the structure undefined.
@@ -51,6 +57,7 @@ Queue* queue_create();
     queue_delete(myQueue);
 */
 int queue_delete(Queue*);
+
 /*
     The function adds the value to the end of the queue.
 
@@ -67,6 +74,7 @@ int queue_delete(Queue*);
     queue_enqueue(myQueue, 42);
 */
 int queue_enqueue(Queue*, int);
+
 /*
     The function returns the first value of the queue and removes it from it.
     If the queue is empty, an FAILURE_CODE is returned (-1 by default) with the corresponding message.
@@ -81,6 +89,7 @@ int queue_enqueue(Queue*, int);
     int dequeued_value = queue_dequeue(myQueue);
 */
 int queue_dequeue(Queue*);
+
 /*
     The function returns the first value of the queue and not removes it from it.
     If the queue is empty, an FAILURE_CODE is returned (-1 by default) with the corresponding message.

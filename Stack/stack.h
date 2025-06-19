@@ -15,10 +15,15 @@
     -It is not recommended to use the structure fields manually, it is better to use the appropriate functions.
     Manual modification can lead to errors, data losses, or undefined results.
 */
+typedef struct stack_t Stack;
 typedef struct stack_t {
     int* array;
     int top;
     int size;
+    int (*delete)(Stack*);
+    int (*add)(Stack*, int);
+    int (*take)(Stack*);
+    int (*next)(Stack*);
 } Stack;
 
 /*
@@ -36,6 +41,7 @@ typedef struct stack_t {
     Stack* myStack = stack_create();
 */
 Stack* stack_create();
+
 /*
     If the stack is no longer required, it should be deleted.
     The function frees up the memory allocated for the stack array and makes the fields of the structure undefined.
@@ -49,6 +55,7 @@ Stack* stack_create();
     stack_delete(myStack);
 */
 int stack_delete(Stack*);
+
 /*
     The function adds a value to the stack.
 
@@ -63,6 +70,7 @@ int stack_delete(Stack*);
     stack_push(myStack, 42);
 */
 int stack_push(Stack*, int);
+
 /*
     The function returns the top value of the stack and removes it from it.
     If the stack is empty, an FAILURE_CODE is returned (-1 by default) with the corresponding message.
@@ -79,6 +87,7 @@ int stack_push(Stack*, int);
     int popped_value = stack_pop(myStack);
 */
 int stack_pop(Stack*);
+
 /*
     The function returns the top value of the stack and not removes it from it.
     If the stack is empty, an FAILURE_CODE is returned (-1 by default) with the corresponding message.

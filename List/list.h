@@ -15,10 +15,18 @@ IMPORTANT:
 -It is not recommended to use the structure fields manually, it is better to use the appropriate functions.
 Manual modification can lead to errors, data losses, or undefined results.
 */
+typedef struct list_t List;
 typedef struct list_t {
     int* array;
     size_t last;
     size_t size;
+    int (*delete)(List*);
+    int (*add)(List*, int);
+    int (*take)(List*, int);
+    int (*remove)(List*, int);
+    int (*find)(List*, int);
+    int (*binarySearch)(List*, int);
+    int (*sort)(List*);
 } List;
 
 /*
@@ -36,6 +44,7 @@ typedef struct list_t {
      List* myList = list_create();
 */
 List* list_create();
+
 /*
     If the list is no longer required, it should be deleted.
     The function frees up the memory allocated for the list array and makes the fields of the structure undefined.
@@ -49,6 +58,7 @@ List* list_create();
     list_delete(myStack);
 */
 int list_delete(List*);
+
 /*
     The function adds a value to the list.
 
@@ -63,6 +73,7 @@ int list_delete(List*);
     list_add(myList, 42);
 */
 int list_add(List*, int);
+
 /*
     The function takes value from the list.
     If the list is empty, an FAILURE_CODE is returned (-1 by default) with the corresponding message.
@@ -78,6 +89,7 @@ int list_add(List*, int);
     list_take(myStack, 42);
 */
 int list_take(List*, int);
+
 /*
     The function removes value from the list.
     If the list is empty, an FAILURE_CODE is returned (-1 by default) with the corresponding message.
@@ -93,6 +105,7 @@ int list_take(List*, int);
     list_remove(myStack, 42);
 */
 int list_remove(List*, int);
+
 /*
     Function searches for the value in the list, and returns its index.
     The search algorithm is similar to linear search, but in some cases it will be slightly faster.
@@ -107,6 +120,7 @@ int list_remove(List*, int);
     int value_index = list_search(myList, 42);
 */
 int list_search(List*, int);
+
 /*
     Function searches for the value in the list, and returns its index.
     The function uses a binary search algorithm, which allows you to search for values
@@ -124,6 +138,7 @@ int list_search(List*, int);
     int value_index = list_binary_search(myList, 42);
 */
 int list_binary_search(List*, int);
+
 /*
     The function sorts the values in the list in ascending order.
     A quick sort algorithm is used.

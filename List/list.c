@@ -33,6 +33,13 @@ List* list_create() {
     }
 
     list->last = -1;
+    list->delete = &list_delete;
+    list->add = &list_add;
+    list->take = &list_take;
+    list->remove = &list_remove;
+    list->find = &list_search;
+    list->binarySearch = &list_binary_search;
+    list->sort = &list_sort;
 
     return list;
 }
